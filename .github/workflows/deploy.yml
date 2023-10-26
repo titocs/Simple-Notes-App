@@ -20,7 +20,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        uses: npm install --legacy-peer-deps
+        uses: npm install --force
 
       - name: Build project
         run: npm run build
