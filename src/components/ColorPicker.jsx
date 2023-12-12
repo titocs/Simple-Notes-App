@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ColorPicker = ({ colorPicker, setOpenModal, setButtonColor }) => {
   const handleClick = (btnColor) => {
@@ -14,6 +15,12 @@ const ColorPicker = ({ colorPicker, setOpenModal, setButtonColor }) => {
       <button className='w-[18px] mx-auto rounded-full h-[18px] bg-purple-300' onClick={() => handleClick('bg-purple-300')}></button>
     </div>
   )
+}
+
+ColorPicker.propTypes = {
+  colorPicker: PropTypes.bool.isRequired,
+  setOpenModal: PropTypes.func.isRequired,
+  setButtonColor: PropTypes.func.isRequired
 }
 
 export default ColorPicker;

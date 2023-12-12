@@ -1,7 +1,8 @@
 import { Modal } from 'flowbite-react';
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-const FormModal = ({ openModal, setOpenModal, addNotesHandler, buttonColor }) => {
+const FormModal = ({ openModal, setOpenModal, addNoteHandler, buttonColor }) => {
   const [note, setNote] = useState({ title: '', body: ''});
   const [sizeChar, setSizeChar] = useState(50);
 
@@ -28,14 +29,14 @@ const FormModal = ({ openModal, setOpenModal, addNotesHandler, buttonColor }) =>
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
     const newNote = {
       title: note.title,
       body: note.body,
       backgroundColor: buttonColor,
     };
 
-    addNotesHandler(newNote);
+    addNoteHandler(newNote);
     setOpenModal(undefined);
   }
 
@@ -75,6 +76,13 @@ const FormModal = ({ openModal, setOpenModal, addNotesHandler, buttonColor }) =>
       </Modal>
     </>
   )
+}
+
+FormModal.propTypes = {
+  openModal: PropTypes.string,
+  setOpenModal: PropTypes.func.isRequired,
+  addNotesHandler: PropTypes.func.isRequired,
+  buttonColor: PropTypes.string.isRequired
 }
 
 export default FormModal;

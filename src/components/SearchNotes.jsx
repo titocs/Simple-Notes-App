@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import PropTypes from 'prop-types';
 
 const SearchNotes = ({ searchNotesHandler }) => {
   const handleInput = (event) => {
@@ -18,6 +19,10 @@ const SearchNotes = ({ searchNotesHandler }) => {
       </form>
     </div>
   )
+}
+
+SearchNotes.propTypes = {
+  searchNotesHandler: PropTypes.func.isRequired
 }
 
 export default SearchNotes;

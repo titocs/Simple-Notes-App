@@ -6,8 +6,9 @@ import { useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import { IconContext } from 'react-icons';
 import ColorPicker from './ColorPicker';
+import PropTypes from 'prop-types';
 
-const AddNotes = ({ addNotesHandler, setNotesData }) => {
+const AddNotes = ({ addNoteHandler }) => {
   const [openModal, setOpenModal] = useState(undefined);
   const [buttonColor, setButtonColor] = useState('');
   const [colorPicker, setColorPicker] = useState(false);
@@ -18,7 +19,7 @@ const AddNotes = ({ addNotesHandler, setNotesData }) => {
 
   return (
     <>
-      <div className=''>
+      <div className='mb-7'>
         <Fade left>
           <div className={`bg-gray-600 ${colorPicker ? 'h-[210px]' : 'h-[40px]'} transition duration-300 w-[40px] rounded-[8rem] mx-auto`}>
             <Tooltip content='Tambah Catatan'>
@@ -40,12 +41,16 @@ const AddNotes = ({ addNotesHandler, setNotesData }) => {
         <FormModal
           openModal={openModal}
           setOpenModal={setOpenModal}
-          addNotesHandler={addNotesHandler}
-          buttonColor={buttonColor}
-          setNotesData={setNotesData}></FormModal>
+          addNoteHandler={addNoteHandler}
+          buttonColor={buttonColor}></FormModal>
       </div>
     </>
   )
+}
+
+AddNotes.propTypes = {
+  addNotesHandler: PropTypes.func.isRequired,
+  setNotesData: PropTypes.func.isRequired
 }
 
 export default AddNotes

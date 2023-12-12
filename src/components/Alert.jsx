@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const Alert = ({ showAlert, setShowAlert }) => {
   useEffect(() => {
@@ -22,5 +23,10 @@ const Alert = ({ showAlert, setShowAlert }) => {
     </div>
   );
 };
+
+Alert.propTypes = {
+  showAlert: PropTypes.bool.isRequired,
+  setShowAlert: PropTypes.func.isRequired
+}
 
 export default Alert
