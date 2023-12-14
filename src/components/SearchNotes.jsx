@@ -1,4 +1,3 @@
-import React from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import PropTypes from 'prop-types';
 
@@ -8,8 +7,10 @@ const SearchNotes = ({ searchNotesHandler }) => {
   }
 
   return (
-    <div className='w-full flex items-center border px-2 py-1 border-slate-400 rounded-md overflow-hidden mb-5 md:w-[470px]'>
-      <BiSearchAlt2/>
+    <div className='w-full flex items-center border px-2 py-1 border-slate-400 rounded-3xl overflow-hidden mb-5 md:w-[470px]'>
+      <div className='border-2 p-2 rounded-full border-slate-300'>
+        <BiSearchAlt2 width={20} />
+      </div>
       <form className='w-full'>
         <input
           type="text"

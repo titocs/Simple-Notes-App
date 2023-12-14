@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import PropTypes from 'prop-types';
-import { deleteNote } from '../../utils/local-data';
 
 const DeleteButton = ({ id, deleteNoteHandler }) => {
   return (
@@ -12,8 +10,11 @@ const DeleteButton = ({ id, deleteNoteHandler }) => {
 }
 
 DeleteButton.propTypes = {
-  id: PropTypes.number.isRequired,
-  deleteNotes: PropTypes.func.isRequired
+  id: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.number.isRequired
+  ]),
+  deleteNoteHandler: PropTypes.func.isRequired
 }
 
 export default DeleteButton

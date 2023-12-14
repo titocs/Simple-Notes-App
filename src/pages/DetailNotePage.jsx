@@ -1,27 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Alert from '../components/Alert';
 import Footer from '../components/Footer';
-import SearchNotes from '../components/SearchNotes';
 import { archiveNote, deleteNote, getAllNotes, getNote, unarchiveNote } from '../utils/local-data';
 import { showFormattedDate } from '../utils';
-import { PiArchiveBoxLight } from "react-icons/pi";
-import { ListGroup, Tooltip } from 'flowbite-react';
+import {  Tooltip } from 'flowbite-react';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BiArchiveIn } from "react-icons/bi";
 import { BiArchiveOut } from "react-icons/bi";
+import Logo from '../components/Logo';
+import PropTypes from 'prop-types';
 
-const DetailNotePage = ({ notes, setNotes}) => {
+const DetailNotePage = ({ setNotes}) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [notesById, setNotesById] = useState(getNote(id));
-  const [archived, setArchived] = useState(notesById.archived);
-
-  console.log("Notes", notes)
-
-  const searchNotesHandler = (search) => {
-    setQuerySearch(search);
-  }
+  const [archived, setArchived] = useState(getNote(id).archived);
 
   const deleteNoteHandler = (id) => {
     deleteNote(id);
@@ -45,16 +37,16 @@ const DetailNotePage = ({ notes, setNotes}) => {
     <>
       <div className='bg-white min-h-screen px-2 flex'>
         <div className=' px-4 py-3 border-r border-slate-400 fixed left-0 top-0 bg-white h-full'>
-          <h1 className='font-bold mb-7'>NotesKu</h1>
+          <Logo />
         </div>
 
         <div className='basis-[100%] relative px-4 py-3 pl-[120px] sm:pl-[130px] md:pl-[160px]'>
           <main>
-            <article className={`${notesById.backgroundColor} p-2 rounded-lg`}>
+            <article className={`${getNote(id).backgroundColor} p-2 rounded-lg`}>
               <div className=''>
-                <h1 className='font-semibold text-center text-2xl mb-5'>{notesById.title}</h1>
-                <p>{showFormattedDate(notesById.createdAt)}</p>
-                <p>{notesById.body}</p>
+                <h1 className='font-semibold text-center text-2xl mb-5'>{getNote(id).title}</h1>
+                <p>{showFormattedDate(getNote(id).createdAt)}</p>
+                <p>{getNote(id).body}</p>
               </div>
             </article>
           </main>
@@ -88,6 +80,10 @@ const DetailNotePage = ({ notes, setNotes}) => {
       <Footer></Footer>
     </>
   )
+}
+
+DetailNotePage.propTypes = {
+  setNotes: PropTypes.func.isRequired
 }
 
 export default DetailNotePage

@@ -49,6 +49,7 @@ const FormModal = ({ openModal, setOpenModal, addNoteHandler, buttonColor }) => 
             <div className="space-y-6">
               <h3 className="text-xl font-medium text-gray-900 text-center dark:text-white">Buat Catatan Baru</h3>
               <div className=''>
+                <p className='flex items-center gap-2 text-sm my-3'>Warna catatan: <span className={`block h-4 w-4 rounded-full ${buttonColor}`}></span></p>
                 <div className='overflow-hidden mb-1'>
                   <input
                     className='w-full rounded-md focus:ring-0 focus:outline-none'
@@ -81,7 +82,7 @@ const FormModal = ({ openModal, setOpenModal, addNoteHandler, buttonColor }) => 
 FormModal.propTypes = {
   openModal: PropTypes.string,
   setOpenModal: PropTypes.func.isRequired,
-  addNotesHandler: PropTypes.func.isRequired,
+  addNoteHandler: PropTypes.func.isRequired,
   buttonColor: PropTypes.string.isRequired
 }
 

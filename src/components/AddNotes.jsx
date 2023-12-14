@@ -1,4 +1,3 @@
-import React from 'react'
 import {IoIosAddCircle} from 'react-icons/io'
 import { Tooltip } from 'flowbite-react';
 import FormModal from './FormModal';
@@ -49,8 +48,7 @@ const AddNotes = ({ addNoteHandler }) => {
 }
 
 AddNotes.propTypes = {
-  addNotesHandler: PropTypes.func.isRequired,
-  setNotesData: PropTypes.func.isRequired
+  addNoteHandler: PropTypes.func.isRequired
 }
 
 export default AddNotes

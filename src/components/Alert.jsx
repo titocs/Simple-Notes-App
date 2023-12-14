@@ -1,4 +1,3 @@
-import React from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
