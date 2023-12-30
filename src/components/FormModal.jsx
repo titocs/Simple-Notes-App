@@ -1,10 +1,13 @@
 import { Modal } from 'flowbite-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { addNote, getActiveNotes } from '../utils/network-data';
+import LocaleContext from '../contexts/LocaleContext';
 
-const FormModal = ({ openModal, setOpenModal, addNoteHandler, buttonColor }) => {
+const FormModal = ({ openModal, setNotesAPI, setOpenModal }) => {
   const [note, setNote] = useState({ title: '', body: ''});
   const [sizeChar, setSizeChar] = useState(50);
+  const { locale } = useContext(LocaleContext);
 
   useEffect(() => {
     if (openModal === 'form-elements') {
@@ -21,69 +24,69 @@ const FormModal = ({ openModal, setOpenModal, addNoteHandler, buttonColor }) => 
       setNote((prevState) => ({ ...prevState, title: newTitle }));
       setSizeChar(remainingChars);
     }
-  }
+  };
 
-  const onChangeBodyHandler = (event) => {
-    setNote((prevState) => ({ ...prevState, body: event.target.value }));
-  }
+  const onInputHandler = (event) => {
+    setNote((prevState) => ({ ...prevState, body: event.target.innerHTML }));
+  };
+
+  const onAddNoteHandler = async (notes) => {
+    addNote(notes);
+    try {
+      const { data } = await getActiveNotes();
+      setNotesAPI(data);
+    } catch(error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     
     const newNote = {
       title: note.title,
-      body: note.body,
-      backgroundColor: buttonColor,
+      body: note.body
     };
 
-    addNoteHandler(newNote);
+    onAddNoteHandler(newNote);
     setOpenModal(undefined);
-  }
+  };
 
   return (
     <>
-      <Modal color='bg-blue-300' show={openModal === 'form-elements'} size="md" popup onClose={() => setOpenModal(undefined)}>
-        <Modal.Header />
-        <Modal.Body>
+      <Modal show={openModal === 'form-elements'} size="md" popup onClose={() => setOpenModal(undefined)}>
+        <Modal.Header className='bg-white rounded-t-md' />
+        <Modal.Body className='bg-white rounded-b-md'>
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
-              <h3 className="text-xl font-medium text-gray-900 text-center dark:text-white">Buat Catatan Baru</h3>
-              <div className=''>
-                <p className='flex items-center gap-2 text-sm my-3'>Warna catatan: <span className={`block h-4 w-4 rounded-full ${buttonColor}`}></span></p>
+              <h3 className="text-xl font-medium text-gray-900 text-center">{ locale === 'id' ? 'Bikin Catatan Baru' : 'Create New Notes'}</h3>
+              <div>
                 <div className='overflow-hidden mb-1'>
                   <input
                     className='w-full rounded-md focus:ring-0 focus:outline-none'
                     type="text"
-                    placeholder='Ini adalah judul...'
+                    placeholder={ locale === 'id' ? 'Ini judul catatan lo...' : 'This is your title...'}
                     value={note.title} onChange={onChangeTitleHandler}
                     required />
                 </div>
-                <div className='text-xs'>Sisa karakter: <span className={`${sizeChar <= 3 ? 'text-red-500' : 'text-black'} font-bold`}>{sizeChar}</span></div>
+                <div className='text-xs'>{locale === 'id' ? 'Sisa karakter:' : 'Remain Characters:'} <span className={`${sizeChar <= 3 ? 'text-red-500' : 'text-black'} font-bold`}>{sizeChar}</span></div>
               </div>
               <div>
-                <textarea 
-                  required
-                  className='w-full rounded-md focus:ring-0 focus:outline-none' 
-                  cols="30"
-                  rows="7"
-                  value={note.body}
-                  placeholder='Isi catatanmu...'
-                  onChange={onChangeBodyHandler}></textarea>
+                <div className='h-[12rem] rounded-md w-full border border-slate-600 p-2 focus:outline-none' contentEditable onInput={onInputHandler} placeholder={ locale === 'id' ? 'Ini body catatan lo...' : 'This is your body`s note'}></div>
               </div>
-              <button className='border border-slate-600 block w-full py-3 rounded-lg' type='submit'>Buat Catatan</button>
+              <button className='border border-slate-600 block w-full py-3 rounded-lg' type='submit'>{ locale === 'id' ? 'Bikin Catatan' : 'Create Note'}</button>
             </div>
           </form>
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
 FormModal.propTypes = {
   openModal: PropTypes.string,
-  setOpenModal: PropTypes.func.isRequired,
-  addNoteHandler: PropTypes.func.isRequired,
-  buttonColor: PropTypes.string.isRequired
-}
+  setNotesAPI: PropTypes.func.isRequired,
+  setOpenModal: PropTypes.func.isRequired
+};
 
 export default FormModal;

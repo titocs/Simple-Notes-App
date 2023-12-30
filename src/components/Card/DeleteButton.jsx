@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 const DeleteButton = ({ id, deleteNoteHandler }) => {
   return (
-    <button className='absolute p-1 bg-red-500 rounded-full right-[15px] top-[-14px]' onClick={() => deleteNoteHandler(id)}>
+    <button className='absolute p-1 bg-red-500 rounded-full right-[15px] top-[-14px] hover:animate-spin' onClick={() => deleteNoteHandler(id)}>
       <RxCross2 size={20} />
     </button>
-  )
-}
+  );
+};
 
 DeleteButton.propTypes = {
   id: PropTypes.oneOfType([
@@ -15,6 +15,6 @@ DeleteButton.propTypes = {
     PropTypes.number.isRequired
   ]),
   deleteNoteHandler: PropTypes.func.isRequired
-}
+};
 
-export default DeleteButton
+export default DeleteButton;

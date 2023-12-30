@@ -6,7 +6,7 @@ const Alert = ({ showAlert, setShowAlert }) => {
   useEffect(() => {
     if (showAlert) {
       const timer = setTimeout(() => {
-        setShowAlert(!showAlert)
+        setShowAlert(!showAlert);
       }, 1000);
 
       return () => {
@@ -26,6 +26,6 @@ const Alert = ({ showAlert, setShowAlert }) => {
 Alert.propTypes = {
   showAlert: PropTypes.bool.isRequired,
   setShowAlert: PropTypes.func.isRequired
-}
+};
 
-export default Alert
+export default Alert;

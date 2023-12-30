@@ -1,19 +1,21 @@
 import SearchNotes from '../components/SearchNotes';
 import ArchivedNotes from '../components/Section/ArchivedNotes';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Alert from '../components/Alert';
 import Footer from '../components/Footer';
 import Logo from '../components/Logo';
 import PropTypes from 'prop-types';
+import ThemeContext from '../contexts/ThemeContext';
 
-const ArchivePage = ({ title, setNotes, querySearch, searchNotesHandler }) => {
+const ArchivePage = ({ title, querySearch, searchNotesHandler }) => {
   const [showAlert, setShowAlert] = useState(false);
+  const { currentTheme } = useContext(ThemeContext);
 
   return (
     <>
-      <div className='bg-white min-h-screen px-2 flex'>
+      <div className={`${currentTheme === 'light' ? 'bg-white' : 'bg-slate-700'} min-h-screen px-2 flex`}>
         <Alert showAlert={showAlert} setShowAlert={setShowAlert}></Alert>
-        <div className=' px-4 py-3 border-r border-slate-400 fixed left-0 top-0 bg-white h-full'>
+        <div className={`${currentTheme === 'light' ? 'bg-white' : 'bg-slate-700'} px-4 py-3 border-r border-slate-400 fixed left-0 top-0 h-full`}>
           <Logo />
         </div>
 
@@ -22,21 +24,19 @@ const ArchivePage = ({ title, setNotes, querySearch, searchNotesHandler }) => {
           <main>
             <ArchivedNotes
               title={title}
-              querySearch={querySearch}
-              setNotes={setNotes}></ArchivedNotes>
+              querySearch={querySearch}></ArchivedNotes>
           </main>
         </div>
       </div>
       <Footer></Footer>
     </>
-  )
-}
+  );
+};
 
 ArchivePage.propTypes = {
   title: PropTypes.string,
-  setNotes: PropTypes.func.isRequired,
   querySearch: PropTypes.string.isRequired,
   searchNotesHandler: PropTypes.func.isRequired
-}
+};
 
-export default ArchivePage
+export default ArchivePage;
