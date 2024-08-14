@@ -1,5 +1,5 @@
 {
-  "homepage": "https://titocs.github.io/Simple-Notes-App",
+  "homepage": "https://titocs.github.io/simple-notes-app",
   "name": "aplikasi-catatan",
   "private": true,
   "version": "0.0.0",
@@ -9,8 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d dist"
   },
   "dependencies": {
     "flowbite": "^1.8.1",
